@@ -1,0 +1,162 @@
+<!-- headding -->
+<h1>Register Now</h1>
+<form #userForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+  <!-- Username -->
+  <div class="form-group form-controll">
+    <label class="form-label" for="username">Username:</label>
+    <input
+      placeholder="Enter Your Name"
+      class="form-control"
+      type="text"
+      id="username"
+      name="username"
+      [(ngModel)]="user.username"
+      required
+    />
+    <div
+      *ngIf="
+        userForm.controls['username'].touched &&
+        userForm.controls['username'].hasError('required')
+      "
+    >
+      Username is required.
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div class="form-group">
+    <label class="form-label" for="email">Email:</label>
+    <input
+      placeholder="Enter Your email"
+      class="form-control"
+      type="email"
+      id="email"
+      name="email"
+      [(ngModel)]="user.email"
+      required
+      email
+    />
+    <div
+      *ngIf="
+        userForm.controls['email'].touched &&
+        userForm.controls['email'].hasError('required')
+      "
+    >
+      Email is required.
+    </div>
+    <div
+      *ngIf="
+        userForm.controls['email'].touched &&
+        userForm.controls['email'].hasError('email')
+      "
+    >
+      Invalid email format.
+    </div>
+  </div>
+
+  <!-- Password -->
+  <div class="form-group">
+    <label class="form-label" for="password">Password:</label>
+    <input
+      placeholder="Enter Your password"
+      class="form-control"
+      type="password"
+      id="password"
+      name="password"
+      [(ngModel)]="user.password"
+      required
+      minlength="6"
+      maxlength="20"
+      pattern="^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,20}$"
+    />
+    <div *ngIf="userForm.controls['password'].touched">
+      <div *ngIf="userForm.controls['password'].hasError('required')">
+        Password is required.
+      </div>
+      <div *ngIf="userForm.controls['password'].hasError('minlength')">
+        Password must be at least 6 characters.
+      </div>
+      <div *ngIf="userForm.controls['password'].hasError('maxlength')">
+        Password cannot exceed 20 characters.
+      </div>
+      <div *ngIf="userForm.controls['password'].hasError('pattern')">
+        Password must contain at least one letter, one number, and one special
+        character.
+      </div>
+    </div>
+  </div>
+
+  <!-- Date of Birth -->
+  <div class="form-group">
+    <label class="form-label" for="dob">Date of Birth:</label>
+    <input
+      class="form-control"
+      type="date"
+      id="dob"
+      name="dob"
+      [(ngModel)]="user.dob"
+      required
+    />
+    <div
+      *ngIf="
+        userForm.controls['dob'].touched &&
+        userForm.controls['dob'].hasError('required')
+      "
+    >
+      Date of Birth is required.
+    </div>
+  </div>
+
+  <!-- Phone Number -->
+  <div class="form-group">
+    <label class="form-label" for="phone">Phone Number:</label>
+    <input
+      placeholder="Enter Your Number"
+      class="form-control"
+      type="tel"
+      id="phone"
+      name="phone"
+      [(ngModel)]="user.phone"
+      required
+      pattern="[0-9]{10}"
+    />
+    <div
+      *ngIf="
+        userForm.controls['phone'].touched &&
+        userForm.controls['phone'].hasError('required')
+      "
+    >
+      Phone Number is required.
+    </div>
+    <div
+      *ngIf="
+        userForm.controls['phone'].touched &&
+        userForm.controls['phone'].hasError('pattern')
+      "
+    >
+      Invalid phone number format (10 digits).
+    </div>
+  </div>
+  <!-- address  -->
+  <div class="form-group">
+    <label class="form-label" for="address">Address:</label>
+    <textarea
+      placeholder="Enter Your Full Address"
+      class="form-control"
+      id="address"
+      name="address"
+      [(ngModel)]="user.address"
+      required
+    ></textarea>
+    <div
+      *ngIf="
+        userForm.controls['address'].touched &&
+        userForm.controls['address'].hasError('required')
+      "
+    >
+      Address is required.
+    </div>
+  </div>
+
+  <button type="submit" [disabled]="userForm.invalid">Register</button>
+</form>
